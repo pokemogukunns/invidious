@@ -2,7 +2,7 @@ version: 1
 services:
   - type: web
     name: invidious
-    env: crystal
+    env: node
     buildCommand: |
       shards install
       crystal build src/invidious.cr --release
