@@ -1,0 +1,8 @@
+crystal
+libssl-dev
+libcrypto++-dev
+libpcre2-dev
+libyaml-dev
+libevent-dev
+libgc-dev
+zlib1g-dev
