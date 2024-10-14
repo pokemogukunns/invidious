@@ -2,14 +2,13 @@ version: 1
 services:
   - type: web
     name: invidious
-    env: bash
+    env: ubuntu
     buildCommand: |
-      # 必要なパッケージのインストール
       apt-get update
-      apt-get install -y crystal shards
-      shards install  # 依存関係のインストール
+      apt-get install -y crystal shards  # 必要なパッケージをインストール
+      shards install  # 依存関係をインストール
       crystal build src/invidious.cr --release  # ビルド
     startCommand: |
-      ./invidious -b 0.0.0.0 -p $PORT  # サーバーの起動
+      ./invidious -b 0.0.0.0 -p $PORT  # アプリケーションの起動
     plan: free
     healthCheckPath: /
