@@ -1,0 +1,12 @@
+version: 1
+services:
+  - type: web
+    name: invidious
+    env: crystal
+    buildCommand: |
+      shards install
+      crystal build src/invidious.cr --release
+    startCommand: |
+      ./invidious -b 0.0.0.0 -p $PORT
+    plan: free
+    healthCheckPath: /
