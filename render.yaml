@@ -4,11 +4,12 @@ services:
     name: invidious
     env: bash
     buildCommand: |
+      # 必要なパッケージのインストール
       apt-get update
-      apt-get install -y crystal shards libssl-dev libcrypto++-dev libpcre2-dev libyaml-dev libevent-dev libgc-dev zlib1g-dev
-      shards install
-      crystal build src/invidious.cr --release
+      apt-get install -y crystal shards
+      shards install  # 依存関係のインストール
+      crystal build src/invidious.cr --release  # ビルド
     startCommand: |
-      ./invidious -b 0.0.0.0 -p $PORT
+      ./invidious -b 0.0.0.0 -p $PORT  # サーバーの起動
     plan: free
     healthCheckPath: /
