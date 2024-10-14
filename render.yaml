@@ -2,8 +2,10 @@ version: 1
 services:
   - type: web
     name: invidious
-    env: node
+    env: bash
     buildCommand: |
+      apt-get update
+      apt-get install -y crystal shards libssl-dev libcrypto++-dev libpcre2-dev libyaml-dev libevent-dev libgc-dev zlib1g-dev
       shards install
       crystal build src/invidious.cr --release
     startCommand: |
