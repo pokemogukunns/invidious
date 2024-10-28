@@ -10,9 +10,8 @@ COPY ./shard.lock ./shard.lock
 RUN shards install --production
 
 COPY ./src/ ./src/
-# TODO: .git folder is required for building – this is destructive.
-# See definition of CURRENT_BRANCH, CURRENT_COMMIT and CURRENT_VERSION.
-COPY ./.git/ ./.git/
+# .git folder is not needed, so commenting it out
+# COPY ./.git/ ./.git/
 
 # Required for fetching player dependencies
 COPY ./scripts/ ./scripts/
