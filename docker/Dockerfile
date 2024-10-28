@@ -11,7 +11,7 @@ RUN shards install --production
 
 COPY ./src/ ./src/
 # .git folder is not needed, so commenting it out
-COPY ./.github/ ./.github/
+# COPY ./.git/ ./.git/
 
 # Required for fetching player dependencies
 COPY ./scripts/ ./scripts/
