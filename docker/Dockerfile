@@ -1,4 +1,4 @@
-FROM crystallang/crystal:1.12.1-alpine AS builder
+FROM crystallang/crystal:1.12.2-alpine AS builder
 
 RUN apk add --no-cache sqlite-static yaml-static
 
@@ -10,8 +10,9 @@ COPY ./shard.lock ./shard.lock
 RUN shards install --production
 
 COPY ./src/ ./src/
-# .git folder is not needed, so commenting it out
-# COPY ./.git/ ./.git/
+# TODO: .git folder is required for building – this is destructive.
+# See definition of CURRENT_BRANCH, CURRENT_COMMIT and CURRENT_VERSION.
+COPY ./.git/ ./.git/
 
 # Required for fetching player dependencies
 COPY ./scripts/ ./scripts/
@@ -31,8 +32,8 @@ RUN if [[ "${release}" == 1 ]] ; then \
         --link-flags "-lxml2 -llzma"; \
     fi
 
-FROM alpine:latest
-RUN apk add --no-cache rsvg-convert ttf-opensans tini
+FROM alpine:3.20
+RUN apk add --no-cache rsvg-convert ttf-opensans tini tzdata
 WORKDIR /invidious
 RUN addgroup -g 1000 -S invidious && \
     adduser -u 1000 -S invidious -G invidious
