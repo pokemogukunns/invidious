@@ -1,9 +1,14 @@
-version: 1
 services:
   - type: web
     name: invidious
-    env: ubuntu
-    buildCommand: "apt-get update && apt-get install -y $(cat requirements.txt)"
-    startCommand: "./invidious -b 0.0.0.0 -p $PORT"
+    env: docker
+    buildCommand: docker build -t invidious .
+    startCommand: docker run -d -p 8080:8080 invidious
     plan: free
-    healthCheckPath: /
+    regions:
+      - oregon
+    envVars:
+      - key: DATABASE_URL
+        value: "postgres://user:password@db.render.com:5432/invidious"
+      - key: SECRET_KEY
+        value: "abc123randomstring!@#secretkey"
