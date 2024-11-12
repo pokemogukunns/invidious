@@ -3,6 +3,7 @@ services:
     name: invidious
     env: docker
     buildCommand: docker build -t invidious .
+    startCommand: docker run -d -p 8080:8080 invidious
     plan: free
     envVars:
       - key: DATABASE_URL
