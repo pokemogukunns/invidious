@@ -5,8 +5,7 @@ services:
     buildCommand: docker build -t invidious .
     startCommand: docker run -d -p 8080:8080 invidious
     plan: free
-    regions:
-      - oregon
+    regions: oregon
     envVars:
       - key: DATABASE_URL
         value: "postgres://user:password@db.render.com:5432/invidious"
