@@ -14,9 +14,10 @@ services:
         value: "3000"
 
 databases:
-- name: invidious-db
- type: postgres
- envVars:
-   - key: DB_HOST
-     value: "invidious-db"
- region: us-east
+  - name: invidious-db
+    type: postgres
+    envVars:
+      - key: DB_HOST
+        value: "invidious-db"
+    region: us-east
+
