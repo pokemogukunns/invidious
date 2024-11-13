@@ -13,7 +13,7 @@ services:
 
 databases:
   - name: invidious-db
-    type: postgres
+    type: postgres  # データベースタイプの指定
     envVars:
       - key: DB_HOST
         value: "invidious-db"
