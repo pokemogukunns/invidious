@@ -1,8 +1,14 @@
+builds:
+  - src: .
+    use: "@vercel/docker"
+    config:
+      dockerfilePath: ./Dockerfile  # Dockerfileのパス
+      buildCommand: 'docker build -t invidious .'  # ビルドコマンド
+      startCommand: 'docker run -p 3000:3000 invidious'  # コンテナ起動コマンド
+
 services:
   - type: web
     name: invidious
-    buildCommand: 'docker build -t invidious .'  # ビルドコマンド
-    startCommand: 'docker run -p 3000:3000 invidious'  # コンテナ起動コマンド
     envVars:
       - key: INVIDIOUS_HOST
         value: "0.0.0.0"
@@ -13,8 +19,9 @@ services:
 
 databases:
   - name: invidious-db
-    type: postgres  # データベースタイプの指定
+    type: postgres
     envVars:
       - key: DB_HOST
         value: "invidious-db"
     region: us-east
+
