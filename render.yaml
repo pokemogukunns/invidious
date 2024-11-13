@@ -2,10 +2,22 @@ services:
   - type: web
     name: invidious
     env: docker
-    buildCommand: docker build -t invidious .
-    plan: free
+    docker:
+      dockerfilePath: ./Dockerfile  # Dockerfileのパス
+    buildCommand: 'docker build -t invidious .'  # ビルドコマンド
+    startCommand: 'docker run invidious'  # コンテナ起動コマンド
+    ports:
+      - port: 3000  # 使用するポート番号
     envVars:
-      - key: DATABASE_URL
-        value: "postgres://user:password@db.render.com:5432/invidious"
-      - key: SECRET_KEY
-        value: "abc123randomstring!@#secretkey"
+      - key: INVIDIOUS_HOST
+        value: "0.0.0.0"
+      - key: PORT
+        value: "3000"
+      
+databases:
+  - name: invidious-db
+    type: postgres
+    envVars:
+      - key: DB_HOST
+        value: "invidious-db"
+    region: us-east
