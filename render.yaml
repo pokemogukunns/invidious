@@ -1,17 +1,15 @@
 services:
   - type: web
     name: invidious
-    docker:
-      dockerfilePath: ./Dockerfile  # Dockerfileのパス
     buildCommand: 'docker build -t invidious .'  # ビルドコマンド
     startCommand: 'docker run -p 3000:3000 invidious'  # コンテナ起動コマンド
-    ports:
-      - port: 3000  # 使用するポート番号
     envVars:
       - key: INVIDIOUS_HOST
         value: "0.0.0.0"
       - key: PORT
         value: "3000"
+    ports:
+      - port: 3000  # 使用するポート番号
 
 databases:
   - name: invidious-db
@@ -20,4 +18,3 @@ databases:
       - key: DB_HOST
         value: "invidious-db"
     region: us-east
-
